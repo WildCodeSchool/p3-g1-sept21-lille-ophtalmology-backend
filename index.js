@@ -1,15 +1,18 @@
 const express = require('express');
+const cors = require('cors');
+const { backPort } = require('./conf');
+const commentsRoutes = require('./routes/comments');
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.get('/characters', async (req, res) => {
-  res.status(404).send('Route not found! ');
-});
+app.use('/comments', commentsRoutes);
 
 app.use('/', (req, res) => {
-  res.status(404).send('Route not found! ');
+  res.status(404).send(`Route not found: ${req.method} ${req.url} `);
 });
 
-app.listen(5050, () => {
-  console.log('Terra Battle API now available on http://localhost:5050 !');
+app.listen(backPort, () => {
+  console.log(`Server is now listening on port ${backPort}`);
 });
