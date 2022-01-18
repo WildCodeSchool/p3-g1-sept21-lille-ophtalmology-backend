@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
       res.status(404).send('Comments not found');
     }
   } catch (err) {
-    res.status(500).send('Error retrivieng the comments');
+    res.status(500).send('Error retrieving the comments');
   }
 });
 
