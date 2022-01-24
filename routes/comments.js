@@ -6,15 +6,15 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const [comments] = await db.query(
-      `SELECT comment, authorName, date FROM comments`
+      `SELECT id, comment, authorName, date FROM comments`
     );
-    if (res.length) {
+    if (comments.length) {
       res.status(200).json(comments);
     } else {
       res.status(404).send('Comments not found');
     }
   } catch (err) {
-    res.status(500).send('Error retrivieng the comments');
+    res.status(500).send('Error retrieving the comments');
   }
 });
 
@@ -22,10 +22,10 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const [comments] = await db.query(
-      `SELECT comment, authorName, date FROM comments WHERE id = ?`,
+      `SELECT id, comment, authorName, date FROM comments WHERE id = ?`,
       [id]
     );
-    if (res.length) {
+    if (comments.length) {
       res.status(200).json(comments);
     } else {
       res.status(404).send('Comment not found');
@@ -52,11 +52,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await db.query(`DELETE FROM comments WHERE id = ?`, [id]);
-    if (res.length) {
-      res.status(200).send('Comment succesfully deleted');
-    } else {
-      res.status(404).send('Comment not found');
-    }
+    res.status(200).send('Comment succesfully deleted');
   } catch (err) {
     res.status(500).send('Error deleting the comment');
   }
