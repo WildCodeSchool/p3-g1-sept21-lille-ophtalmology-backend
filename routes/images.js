@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const [images] = await db.query(`SELECT id, url, title FROM images`);
+    const [images] = await db.query(`SELECT id, url, description FROM images`);
     if (images.length) {
       res.status(200).json(images);
     } else {
@@ -20,7 +20,7 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const [images] = await db.query(
-      `SELECT id, url, title FROM images WHERE id = ?`,
+      `SELECT id, url, description FROM images WHERE id = ?`,
       [id]
     );
     if (images.length) {
@@ -35,14 +35,29 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { url, title } = req.body;
-    await db.query(`INSERT INTO images (url, title) VALUES (?, ?)`, [
-      url,
-      title,
-    ]);
+    const { url, description, idContents } = req.body;
+    await db.query(
+      `INSERT INTO images (url, description, idContents) VALUES (?, ?, ?)`,
+      [url, description, idContents]
+    );
     res.status(201).send('Image created');
   } catch (err) {
     res.status(500).send('Error creating the image');
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { url, description } = req.body;
+    await db.query(`UPDATE images SET url = ?, description = ? WHERE id = ?`, [
+      url,
+      description,
+      id,
+    ]);
+    res.status(201).send('Image succesfully updated');
+  } catch (err) {
+    res.status(500).send('Error updating the image');
   }
 });
 
