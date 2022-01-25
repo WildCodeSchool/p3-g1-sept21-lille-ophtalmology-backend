@@ -8,6 +8,7 @@
   "license": "ISC",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "lint": "eslint \"./**/*.js\" --fix .",
     "prettify": "prettier --write ."
   },
@@ -28,7 +29,8 @@
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
@@ -37,8 +39,8 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
     "husky": "4.3.8",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1"
