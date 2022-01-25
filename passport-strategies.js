@@ -13,7 +13,6 @@ passport.use(
       passwordField: 'password',
     },
     async (formUsername, formPassword, done) => {
-      console.log(formUsername, formPassword, 'toto');
       try {
         const [sqlRes] = await db.query(
           `SELECT id, email, username, password FROM admin WHERE username=?`,
