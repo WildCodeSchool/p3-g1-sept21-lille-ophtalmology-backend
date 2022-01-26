@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
   try {
     const { title, text, idPages } = req.body;
     await db.query(
-      `INSERT INTO contents (title, text, idPages, date) VALUES (?, ?, ?)`,
+      `INSERT INTO contents (title, text, idPages) VALUES (?, ?, ?)`,
       [title, text, idPages]
     );
     res.status(201).send('Content created');
