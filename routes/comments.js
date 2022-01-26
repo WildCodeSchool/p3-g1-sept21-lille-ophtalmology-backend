@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const [comments] = await db.query(
-      `SELECT id, comment, authorName, date FROM comments`
+      `SELECT id, message, authorName, date, idPages, idParent FROM comments`
     );
     if (comments.length) {
       res.status(200).json(comments);
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const [comments] = await db.query(
-      `SELECT id, comment, authorName, date FROM comments WHERE id = ?`,
+      `SELECT id, message, authorName, date, idPages, idParent FROM comments WHERE id = ?`,
       [id]
     );
     if (comments.length) {
@@ -37,10 +37,10 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { comment, authorName, idPages } = req.body;
+    const { message, authorName, idPages, idParent } = req.body;
     await db.query(
-      `INSERT INTO comments (comment, authorName, idPages, date) VALUES (?, ?, ?, NOW())`,
-      [comment, authorName, idPages]
+      `INSERT INTO comments (message, authorName, idPages, idParent, date) VALUES (?, ?, ?, ?, NOW())`,
+      [message, authorName, idPages, idParent]
     );
     res.status(201).send('Comment created');
   } catch (err) {
