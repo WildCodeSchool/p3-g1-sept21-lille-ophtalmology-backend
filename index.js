@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const { backPort } = require('./conf');
 const commentsRoutes = require('./routes/comments');
@@ -9,6 +10,7 @@ const imagesRoutes = require('./routes/images');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/comments', commentsRoutes);
 app.use('/contents', contentsRoutes);
