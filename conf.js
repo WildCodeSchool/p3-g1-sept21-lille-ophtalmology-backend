@@ -22,6 +22,6 @@ const db = mysql.createPool({
 module.exports = {
   db,
   backPort: PORT,
-  jwt_rounds: parseInt(JWT_SALTROUNDS),
+  jwt_rounds: parseInt(JWT_SALTROUNDS, 10),
   jwt_secret: JWT_SECRET,
 };
