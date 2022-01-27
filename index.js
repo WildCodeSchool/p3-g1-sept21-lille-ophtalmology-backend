@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
 const { backPort } = require('./conf');
@@ -13,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(passport.initialize());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/comments', commentsRoutes);
 app.use('/contents', contentsRoutes);
