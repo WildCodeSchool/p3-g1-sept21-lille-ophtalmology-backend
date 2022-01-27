@@ -5,7 +5,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const [images] = await db.query(`SELECT id, url, description FROM images`);
+    const [images] = await db.query(
+      `SELECT images.id, url, description, idContents FROM images INNER JOIN contents ON images.idContents=contents.id`
+    );
     if (images.length) {
       res.status(200).json(images);
     } else {
