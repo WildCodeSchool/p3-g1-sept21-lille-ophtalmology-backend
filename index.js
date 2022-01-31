@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
-const { backPort } = require('./conf');
+const { backPort, frontUrl } = require('./conf');
 const commentsRoutes = require('./routes/comments');
 const contentsRoutes = require('./routes/contents');
 const videosRoutes = require('./routes/videos');
@@ -11,7 +11,7 @@ const authRoutes = require('./routes/auth');
 const miscRoutes = require('./routes/misc');
 
 const app = express();
-app.use(cors());
+app.use(cors({ credentials: true, origin: { frontUrl } }));
 app.use(passport.initialize());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
