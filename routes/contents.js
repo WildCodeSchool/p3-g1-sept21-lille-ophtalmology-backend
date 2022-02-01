@@ -8,11 +8,7 @@ router.get('/', async (req, res) => {
     const [contents] = await db.query(
       `SELECT id, title, text, idPages FROM contents`
     );
-    if (contents.length) {
-      res.status(200).json(contents);
-    } else {
-      res.status(404).send('Contents not found');
-    }
+    res.status(200).json(contents);
   } catch (err) {
     res.status(500).send('Error retrieving the contents');
   }

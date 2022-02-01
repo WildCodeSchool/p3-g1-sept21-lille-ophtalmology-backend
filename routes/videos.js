@@ -6,11 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const [videos] = await db.query(`SELECT id, url, title FROM videos`);
-    if (videos.length) {
-      res.status(200).json(videos);
-    } else {
-      res.status(404).send('Videos not found');
-    }
+    res.status(200).json(videos);
   } catch (err) {
     res.status(500).send('Error retrieving the videos');
   }
