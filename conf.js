@@ -9,7 +9,6 @@ const {
   DB_SCHEMA,
   JWT_SALTROUNDS,
   JWT_SECRET,
-  FRONT_URL,
 } = process.env;
 
 const db = mysql.createPool({
@@ -18,7 +17,6 @@ const db = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_SCHEMA,
-  frontURl: FRONT_URL,
 });
 
 module.exports = {
